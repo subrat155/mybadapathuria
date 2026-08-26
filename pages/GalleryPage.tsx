@@ -334,7 +334,7 @@ const GalleryPage: React.FC = () => {
 
         <p className="text-black/50 max-w-lg mx-auto mb-8">
           Have old photos of Badapathuria? Help us build a digital
-          archive of our village history.
+          archive of our village history via our whatsapp.
         </p>
 
         {/* <button
