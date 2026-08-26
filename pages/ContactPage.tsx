@@ -49,7 +49,7 @@ const ContactPage: React.FC = () => {
              <div className="space-y-8">
                 {[
                   { icon: <MapPin />, title: 'Village Office', detail: ' Badapathuria,Block-Ranpur, Odisha - 752064', color: 'bg-blue-50 text-blue-600' },
-                  { icon: <Phone />, title: 'Emergency Contact', detail: '+91 9556545345', color: 'bg-red-50 text-red-600' },
+                  { icon: <Phone />, title: 'Emergency Contact', detail: '+91 8260599435', color: 'bg-red-50 text-red-600' },
                   { icon: <Mail />, title: 'Official Email', detail: 'contact@badapathuria.in', color: 'bg-green-50 text-green-600' },
                   { icon: <Clock />, title: 'Office Hours', detail: 'Mon - Sat: 10:00 AM - 05:00 PM', color: 'bg-yellow-50 text-yellow-600' },
                 ].map((item, i) => (
