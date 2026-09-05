@@ -93,84 +93,72 @@ const HomePage: React.FC = () => {
       {/* =====================================================
           RECENT NOTICES TICKER
       ===================================================== */}
+{recentNotices.length > 0 && (
+  <div className="sticky top-[72px] z-40 bg-black text-white overflow-hidden border-b border-white/10 shadow-md">
+    <div className="flex items-center h-12">
 
-      {recentNotices.length > 0 && (
+      {/* Label */}
+      <div className="relative z-20 flex-shrink-0 bg-[#88AB8E] h-full px-5 flex items-center gap-2 font-bold text-sm shadow-lg">
+        <Megaphone size={16} />
 
-        <div className="sticky top-[72px] z-40 bg-black text-white overflow-hidden border-b border-white/10 shadow-md">
+        <span className="hidden sm:inline">
+          Recent Notices
+        </span>
+      </div>
 
-          <div className="flex items-center h-12">
+      {/* Ticker */}
+      <div className="relative overflow-hidden flex-1 h-full flex items-center">
 
-            <div className="relative z-20 flex-shrink-0 bg-[#88AB8E] h-full px-5 flex items-center gap-2 font-bold text-sm shadow-lg">
+        <div className="notice-track">
 
-              <Megaphone size={16} />
+          {/* GROUP 1 */}
+          <div className="notice-group">
+            {recentNotices.map((notice) => (
+              <Link
+                key={`group1-${notice.id}`}
+                to="/notices"
+                className="inline-flex items-center gap-3 mx-8 text-sm hover:text-[#88AB8E] transition-colors"
+              >
+                <span className="w-2 h-2 rounded-full bg-[#88AB8E] flex-shrink-0" />
 
-              <span className="hidden sm:inline">
-                Recent Notices
-              </span>
+                <span className="font-semibold">
+                  {notice.title}
+                </span>
 
-            </div>
+                <span className="text-white/40">
+                  {notice.date}
+                </span>
+              </Link>
+            ))}
+          </div>
 
-            <div className="relative overflow-hidden flex-1 h-full flex items-center">
+          {/* GROUP 2 - exact duplicate */}
+          <div className="notice-group">
+            {recentNotices.map((notice) => (
+              <Link
+                key={`group2-${notice.id}`}
+                to="/notices"
+                className="inline-flex items-center gap-3 mx-8 text-sm hover:text-[#88AB8E] transition-colors"
+              >
+                <span className="w-2 h-2 rounded-full bg-[#88AB8E] flex-shrink-0" />
 
-            <div className="notice-marquee items-center whitespace-nowrap">
+                <span className="font-semibold">
+                  {notice.title}
+                </span>
 
-  {recentNotices.map((notice) => (
-    <Link
-      key={`first-${notice.id}`}
-      to="/notices"
-      className="inline-flex items-center gap-3 mx-8 text-sm"
-    >
-      <span className="w-2 h-2 rounded-full bg-[#88AB8E] flex-shrink-0" />
-      <span className="font-semibold">{notice.title}</span>
-      <span className="text-white/40">{notice.date}</span>
-    </Link>
-  ))}
-
-  {recentNotices.map((notice) => (
-    <Link
-      key={`second-${notice.id}`}
-      to="/notices"
-      className="inline-flex items-center gap-3 mx-8 text-sm"
-    >
-      <span className="w-2 h-2 rounded-full bg-[#88AB8E] flex-shrink-0" />
-      <span className="font-semibold">{notice.title}</span>
-      <span className="text-white/40">{notice.date}</span>
-    </Link>
-  ))}
-
-  {recentNotices.map((notice) => (
-    <Link
-      key={`third-${notice.id}`}
-      to="/notices"
-      className="inline-flex items-center gap-3 mx-8 text-sm"
-    >
-      <span className="w-2 h-2 rounded-full bg-[#88AB8E] flex-shrink-0" />
-      <span className="font-semibold">{notice.title}</span>
-      <span className="text-white/40">{notice.date}</span>
-    </Link>
-  ))}
-
-  {recentNotices.map((notice) => (
-    <Link
-      key={`fourth-${notice.id}`}
-      to="/notices"
-      className="inline-flex items-center gap-3 mx-8 text-sm"
-    >
-      <span className="w-2 h-2 rounded-full bg-[#88AB8E] flex-shrink-0" />
-      <span className="font-semibold">{notice.title}</span>
-      <span className="text-white/40">{notice.date}</span>
-    </Link>
-  ))}
-
-</div>
-
-            </div>
-
+                <span className="text-white/40">
+                  {notice.date}
+                </span>
+              </Link>
+            ))}
           </div>
 
         </div>
 
-      )}
+      </div>
+    </div>
+  </div>
+)}
 
 
       {/* =====================================================
