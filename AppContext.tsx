@@ -1,4 +1,4 @@
-import React, {
+7import React, {
   createContext,
   useContext,
   useState,
@@ -474,51 +474,86 @@ useEffect(() => {
   // ========================================
 
   const addImage = async (image: {
-    file: File;
-    title: string;
-    description: string;
-  }): Promise<boolean> => {
+  file: File;
+  title: string;
+  description: string;
+}): Promise<boolean> => {
+  try {
+    setIsProcessing(true);
+    setProcessMessage('Uploading image...');
+
+    const formData = new FormData();
+
+    formData.append('image', image.file);
+    formData.append('title', image.title.trim());
+    formData.append('description', image.description.trim());
+
+    console.log('Uploading file:', image.file);
+    console.log('File name:', image.file.name);
+    console.log('File type:', image.file.type);
+    console.log('File size:', image.file.size);
+
+    const response = await fetch(`${API_URL}/gallery`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    const text = await response.text();
+
+    console.log('Gallery status:', response.status);
+    console.log('Gallery raw response:', text);
+
+    let data;
+
     try {
-      setIsProcessing(true);
-      setProcessMessage('Saving contribution...');
-
-      const formData = new FormData();
-      formData.append('image', image.file);
-      formData.append('title', image.title);
-      formData.append('description', image.description);
-
-      const response = await fetch(`${API_URL}/gallery`, {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await response.json();
-      console.log('Add gallery response:', data);
-
-      if (!response.ok || !data.success) {
-        console.error('GALLERY BACKEND ERROR:', data);
-        alert(data.message || data.error || `Upload failed with status ${response.status}`);
-        return false;
-      }
-
-      const newGalleryImage: GalleryImage = {
-        id: data.gallery._id,
-        url: data.gallery.url,
-        title: data.gallery.title,
-        description: data.gallery.description,
-      };
-
-      setBackendGallery((prev) => [newGalleryImage, ...prev]);
-      return true;
-    } catch (error) {
-      console.error('Add gallery image error:', error);
-      alert('Failed to upload gallery image');
+      data = JSON.parse(text);
+    } catch {
+      console.error('Backend did not return JSON:', text);
+      alert(`Server error (${response.status}). Check Render logs.`);
       return false;
-    } finally {
-      setIsProcessing(false);
-      setProcessMessage('');
     }
-  };
+
+    if (!response.ok || !data.success) {
+      console.error('GALLERY BACKEND ERROR:', data);
+
+      alert(
+        data.message ||
+        data.error ||
+        `Upload failed with status ${response.status}`
+      );
+
+      return false;
+    }
+
+    const newGalleryImage: GalleryImage = {
+      id: data.gallery._id,
+      url: data.gallery.url,
+      title: data.gallery.title,
+      description: data.gallery.description,
+    };
+
+    setBackendGallery((prev) => [
+      newGalleryImage,
+      ...prev,
+    ]);
+
+    return true;
+
+  } catch (error) {
+    console.error('Add gallery image error:', error);
+
+    alert(
+      'Unable to connect to the backend. Check Render server.'
+    );
+
+    return false;
+
+  } finally {
+    setIsProcessing(false);
+    setProcessMessage('');
+  }
+};
+    
 
   // ========================================
   // GALLERY – DELETE IMAGE
