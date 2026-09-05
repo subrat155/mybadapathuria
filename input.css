@@ -4,7 +4,7 @@
 .notice-marquee {
   display: inline-flex;
   width: max-content;
-  animation: notice-scroll 25s linear infinite;
+  animation: notice-scroll 5s linear infinite;
 }
 
 @keyframes notice-scroll {
