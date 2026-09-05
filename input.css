@@ -1,10 +1,17 @@
 @import "tailwindcss";
 
 /* Recent Notices Ticker */
-.notice-marquee {
-  display: inline-flex;
+.notice-track {
+  display: flex;
   width: max-content;
-  animation: notice-scroll 15s linear infinite;
+  animation: notice-scroll 20s linear infinite;
+  will-change: transform;
+}
+
+.notice-group {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 100vw;
 }
 
 @keyframes notice-scroll {
@@ -17,6 +24,6 @@
   }
 }
 
-.notice-marquee:hover {
+.notice-track:hover {
   animation-play-state: paused;
 }
