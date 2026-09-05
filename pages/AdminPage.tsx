@@ -95,14 +95,16 @@ const AdminPage: React.FC = () => {
 
 
   const [newImage, setNewImage] = useState<{
-    file: File | null;
-    title: string;
-    description: string;
-  }>({
-    file: null,
-    title: '',
-    description: ''
-  });
+  file: File | null;
+  preview: string;
+  title: string;
+  description: string;
+}>({
+  file: null,
+  preview: '',
+  title: '',
+  description: ''
+});
 
 
   const [newReview, setNewReview] = useState({
@@ -173,20 +175,22 @@ const AdminPage: React.FC = () => {
   // =====================================================
 
   const handleFileUpload = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
 
-    const file = e.target.files?.[0];
+  const file = e.target.files?.[0];
 
-    if (!file) return;
+  if (!file) return;
 
-    setNewImage(prev => ({
-      ...prev,
-      file
-    }));
+  const preview = URL.createObjectURL(file);
 
-  };
+  setNewImage(prev => ({
+    ...prev,
+    file,
+    preview
+  }));
 
+};
 
   // =====================================================
   // HOME HERO UPLOAD
@@ -1670,12 +1674,10 @@ const AdminPage: React.FC = () => {
                 <div className="relative w-full h-32 rounded-2xl overflow-hidden border border-gray-100 shadow-inner">
 
                   <img
-                    src={URL.createObjectURL(
-                      newImage.file
-                    )}
-                    className="w-full h-full object-cover"
-                    alt="Preview"
-                  />
+  src={newImage.preview}
+  className="w-full h-full object-cover"
+  alt="Preview"
+/>
 
 
                   <button
@@ -1683,9 +1685,10 @@ const AdminPage: React.FC = () => {
                     onClick={() => {
 
                       setNewImage(prev => ({
-                        ...prev,
-                        file: null
-                      }));
+  ...prev,
+  file: null,
+  preview: ''
+}));
 
 
                       if (fileInputRef.current) {
@@ -1808,6 +1811,7 @@ const AdminPage: React.FC = () => {
                       setNewImage({
 
                         file: null,
+                        preview: '',
                         title: '',
                         description: ''
 
