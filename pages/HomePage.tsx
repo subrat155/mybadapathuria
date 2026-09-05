@@ -112,53 +112,57 @@ const HomePage: React.FC = () => {
 
             <div className="relative overflow-hidden flex-1 h-full flex items-center">
 
-              <div className="notice-marquee flex items-center whitespace-nowrap">
+            <div className="notice-marquee items-center whitespace-nowrap">
 
-                {recentNotices.map((notice) => (
+  {recentNotices.map((notice) => (
+    <Link
+      key={`first-${notice.id}`}
+      to="/notices"
+      className="inline-flex items-center gap-3 mx-8 text-sm"
+    >
+      <span className="w-2 h-2 rounded-full bg-[#88AB8E] flex-shrink-0" />
+      <span className="font-semibold">{notice.title}</span>
+      <span className="text-white/40">{notice.date}</span>
+    </Link>
+  ))}
 
-                  <Link
-                    key={`first-${notice.id}`}
-                    to="/notices"
-                    className="inline-flex items-center gap-3 mx-8 text-sm hover:text-[#88AB8E] transition-colors"
-                  >
+  {recentNotices.map((notice) => (
+    <Link
+      key={`second-${notice.id}`}
+      to="/notices"
+      className="inline-flex items-center gap-3 mx-8 text-sm"
+    >
+      <span className="w-2 h-2 rounded-full bg-[#88AB8E] flex-shrink-0" />
+      <span className="font-semibold">{notice.title}</span>
+      <span className="text-white/40">{notice.date}</span>
+    </Link>
+  ))}
 
-                    <span className="w-2 h-2 rounded-full bg-[#88AB8E] flex-shrink-0" />
+  {recentNotices.map((notice) => (
+    <Link
+      key={`third-${notice.id}`}
+      to="/notices"
+      className="inline-flex items-center gap-3 mx-8 text-sm"
+    >
+      <span className="w-2 h-2 rounded-full bg-[#88AB8E] flex-shrink-0" />
+      <span className="font-semibold">{notice.title}</span>
+      <span className="text-white/40">{notice.date}</span>
+    </Link>
+  ))}
 
-                    <span className="font-semibold">
-                      {notice.title}
-                    </span>
+  {recentNotices.map((notice) => (
+    <Link
+      key={`fourth-${notice.id}`}
+      to="/notices"
+      className="inline-flex items-center gap-3 mx-8 text-sm"
+    >
+      <span className="w-2 h-2 rounded-full bg-[#88AB8E] flex-shrink-0" />
+      <span className="font-semibold">{notice.title}</span>
+      <span className="text-white/40">{notice.date}</span>
+    </Link>
+  ))}
 
-                    <span className="text-white/40">
-                      {notice.date}
-                    </span>
-
-                  </Link>
-
-                ))}
-
-                {recentNotices.map((notice) => (
-
-                  <Link
-                    key={`second-${notice.id}`}
-                    to="/notices"
-                    className="inline-flex items-center gap-3 mx-8 text-sm hover:text-[#88AB8E] transition-colors"
-                  >
-
-                    <span className="w-2 h-2 rounded-full bg-[#88AB8E] flex-shrink-0" />
-
-                    <span className="font-semibold">
-                      {notice.title}
-                    </span>
-
-                    <span className="text-white/40">
-                      {notice.date}
-                    </span>
-
-                  </Link>
-
-                ))}
-
-              </div>
+</div>
 
             </div>
 
